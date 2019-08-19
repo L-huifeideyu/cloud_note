@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" 
+	src="scripts/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	$("#searchBtn").click(function(){
+		//获取请求参数
+		var title = $("#title").val().trim();
+		var status = $("#status").val();
+		var beginTime = $("#beginTime").val().trim();
+		var endTime = $("#endTime").val().trim();
+		//发送ajax请求
+		$.ajax({
+			url:"http://localhost:8088/cloud_note/note/highSearch.do",
+			type:"post",
+			data:{"title":title,"status":status,
+				"beginTime":beginTime,"endTime":endTime},
+			dataType:"json",
+			success:function(result){
+				if(result.status==0){
+					//清除原有tr
+					$("#search_list tr:gt(0)").remove();
+					var notes = result.data;//笔记对象json数组
+					for(var i=0;i<notes.length;i++){
+						var noteTitle = notes[i].cn_note_title;
+						var noteStatus = notes[i].cn_note_status_id;
+						var createTime = notes[i].createTime;//匹配getCreateTime()方法
+						var statusTxt = noteStatus=="1"?"normal":"recycle";
+						var str = "<tr><td>"+noteTitle+"</td><td>"
+							+statusTxt+"</td><td>"+createTime
+							+"</td></tr>";
+						//添加到table中
+						$("#search_list").append(str);
+					}
+				}
+			},
+			error:function(){
+				alert("搜索失败");
+			}
+		});
+	});
+});
+</script>
+<title>高级检索</title>
+</head>
+<body>
+标题:<input type="text" id="title">
+状态:<select id="status">
+		<option value="0">-all-</option>
+		<option value="1">normal</option>
+		<option value="2">recycle</option>
+	</select>
+<br/>
+开始日期:<input type="text" id="beginTime">
+结束日期:<input type="text" id="endTime">
+<input type="button" id="searchBtn" value="开始搜索">
+<hr/>
+<table id="search_list">
+	<tr><td>标题</td><td>状态</td><td>创建日期</td></tr>
+</table>
+</body>
+</html>
+
+

@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebRoot/alert/alert_delete_note.html=UTF-8
+encoding//WebRoot/alert/alert_error.html=UTF-8
+encoding//WebRoot/alert/alert_move.html=UTF-8
+encoding//WebRoot/alert/alert_note.html=UTF-8
+encoding//WebRoot/alert/alert_notebook.html=UTF-8
+encoding//WebRoot/edit.html=UTF-8
+encoding//WebRoot/log_in.html=UTF-8
+encoding//WebRoot/scripts/alert.js=UTF-8
+encoding//WebRoot/scripts/cookie_util.js=UTF-8
+encoding//src/org/tarena/note/service/BookServiceImpl.java=UTF-8
+encoding//src/org/tarena/note/service/NoteServiceImpl.java=UTF-8
